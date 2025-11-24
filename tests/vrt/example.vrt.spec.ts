@@ -15,11 +15,12 @@
 
 import { test, expect } from './vrt.fixture';
 
-test.describe('Example.com homepage VRT', () => {
+test.describe('Vladimir Shkodin resume PDF VRT', () => {
   test('matches the expected full-page screenshot', async ({ page }) => {
-    // Open the target page.
-    // If your app exposes a local /health page, you can change this URL to that endpoint.
-    await page.goto('https://example.com', { waitUntil: 'networkidle' });
+    // Open the target page (public resume PDF hosted on vshkodin.com).
+    await page.goto('https://vshkodin.com/VladimirShkodin.docx.pdf', {
+      waitUntil: 'networkidle',
+    });
 
     // Give the page a brief moment to settle for any late layout changes.
     await page.waitForTimeout(1000);
