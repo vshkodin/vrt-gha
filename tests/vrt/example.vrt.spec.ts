@@ -11,16 +11,20 @@
  * NOTE: The generated snapshot directory for this spec (for example:
  *   tests/vrt/example.vrt.spec.ts-snapshots/homepage.png
  * ) must be committed to the repo so CI can compare against it.
+ *
+ * This spec deliberately targets a small HTML file stored in the repo
+ * (example-page.html) so that the bitmap is stable and fully controlled
+ * by the project, instead of relying on external websites.
  */
 
+import * as path from 'path';
 import { test, expect } from './vrt.fixture';
 
-test.describe('Vladimir Shkodin resume PDF VRT', () => {
+test.describe('Local VRT sample page', () => {
   test('matches the expected full-page screenshot', async ({ page }) => {
-    // Open the target page (public resume PDF hosted on vshkodin.com).
-    await page.goto('https://vshkodin.com/VladimirShkodin.docx.pdf', {
-      waitUntil: 'networkidle',
-    });
+    // Open a deterministic local HTML page from the repo instead of an external site.
+    const filePath = path.resolve(__dirname, 'example-page.html');
+    await page.goto('file://' + filePath);
 
     // Give the page a brief moment to settle for any late layout changes.
     await page.waitForTimeout(1000);
